@@ -9,6 +9,15 @@ function App() {
   return (
     <>
       <h1>Hello World!!</h1>
+
+      <h2>{"Count" + count}</h2>
+      <button
+        onClick={() => {
+          setCount(pre => (
+            pre += 1
+          ))
+        }}
+      >Click Me</button>
     </>
   )
 }
