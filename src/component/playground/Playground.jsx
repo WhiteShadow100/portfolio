@@ -29,6 +29,8 @@ function PlayGround(){
             >
             Click Me
             </button>
+
+            <Link to={"/canvas"}>Canvas</Link>
         </>
     )
 }
