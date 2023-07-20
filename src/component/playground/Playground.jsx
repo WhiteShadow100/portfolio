@@ -19,7 +19,7 @@ function PlayGround(){
             }}
             />
 
-            <h2>{"Count" + count}</h2>
+            <h2>{"Count: " + count}</h2>
             <button
             onClick={() => {
                 setCount(pre => (
