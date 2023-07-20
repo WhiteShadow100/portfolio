@@ -5,12 +5,13 @@ import './App.css'
 import { Link } from 'react-router-dom'
 import AppRouter from './AppRouter'
 
+import './style/canvas.css';
+
 function App() {
   
 
   return (
     <>
-      {/* <Link to={"/Canvas"}>Canvas</Link> */}
       <AppRouter />
     </>
   )
