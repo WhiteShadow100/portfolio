@@ -13,8 +13,8 @@ function StarCanvas(){
     useEffect(() => {
         if(starCount > 100){
             setStarCount(pre => 100)
-            alert("Sorry, uable to generate more than 100 circles.")
         }
+        
         if(canvas.current){
 
             let ctx = canvas.current.getContext('2d');
