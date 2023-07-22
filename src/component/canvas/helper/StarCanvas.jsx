@@ -8,10 +8,15 @@ function StarCanvas(){
     // getting the canvas element
     const canvas = useRef();
 
+    
+
     useEffect(() => {
         if(canvas.current){
 
-            console.log(canvas.current.width)
+            let ctx = canvas.current.getContext('2d');
+            
+            // Normalize coordinate system to use css pixels.
+            // ctx.scale(2, 2);
 
             // canvas.current.onmousemove = drawCircle;
 
@@ -40,17 +45,56 @@ function StarCanvas(){
             //     // }
             // }
 
-            let ctx = canvas.current.getContext('2d');
 
             // radius of the circle
-            let radius = 10
-            
-            let x = Math.random() * (canvas.current.width - radius);
-            let y = Math.random() * (canvas.current.height - radius);
 
-            // vector represnting movement
-            let dx = Math.random() >= 0.5 ? 1 : -1
-            let dy = Math.random() >= 0.5 ? 1 : -1
+            // Circle Object
+            function Circle(x, y, dx, dy, radius = 10, color =  `rgb(255, 255, 255)`){
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.radius = radius;
+                this.color = color
+
+                this.draw  = function(){
+                    ctx.beginPath();
+                    ctx.strokeStyle = this.color;
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+
+                this.update = function(){
+                    if((this.x + this.radius >= canvas.current.width) || (this.x <= 0 + this.radius)){
+                        this.dx = -this.dx;
+                    }
+    
+                    if((this.y + radius >= canvas.current.height) || (this.y <= 0 + this.radius)){
+                        this.dy = -this.dy;
+                    }
+    
+                    this.x += this.dx;
+                    this.y += this.dy;
+
+                    this.draw();
+                }
+            }
+
+            let circleArray = [];
+
+
+            for(let i=0; i<1000; i++){
+                let radius = 10;
+                let x =  Math.random() * (canvas.current.width - radius);
+                let y = Math.random() * (canvas.current.height - radius);
+                let dx = Math.random() >= 0.5 ? 1 : -1;
+                let dy = Math.random() >= 0.5 ? 1 : -1;
+                let color =  `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
+
+                let temp_circle = new Circle(x, y, dx, dy, radius, color);
+                circleArray.push(temp_circle)
+            }
 
 
             function animate(){
@@ -59,50 +103,20 @@ function StarCanvas(){
                 // clearing canvas
                 ctx.clearRect(0, 0, innerWidth, innerHeight)
 
-                // let x = Math.random() * 500;
-                // let y = Math.random() * 500;
-
-                
-                ctx.beginPath();
-                // ctx.strokeStyle = `rgb(${ Math.random() * 255}, ${ Math.random() * 255}, ${ Math.random() * 255})`;
-                ctx.strokeStyle = `rgb(255, 255, 255)`;
-                ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-                ctx.stroke();
-
-                if((x + radius > canvas.current.width) || (x < 0 + radius)){
-                    dx = -dx
+                for(let i=0; i < circleArray.length; i++){
+                    circleArray[i].update();
                 }
 
-                if((y + radius > canvas.current.height) || (y < 0 + radius)){
-                    dy = -dy
-                }
+                // let temp_circle = new Circle(10, 10, 1, 1);
 
-                x += dx
-                y += dy
+                // temp_circle.draw()
 
-                console.log(y)
 
             }
 
+            
             animate()
             
-            // let ctx = canvas.current.getContext('2d');
-
-            // ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            
-            // for(let i = 1; i <= starCount; i++){
-            //     let x = Math.random() * 500;
-            //     let y = Math.random() * 500;
-                
-            //     ctx.beginPath();
-            //     // ctx.fillStyle = `rgb(${ Math.random() * 255}, ${ Math.random() * 255}, ${ Math.random() * 255})`;
-            //     ctx.strokeStyle = `rgb(${ Math.random() * 255}, ${ Math.random() * 255}, ${ Math.random() * 255})`;
-            //     ctx.arc(x, y, 10, 0, Math.PI * 2, false);
-            //     // ctx.fill();
-            //     ctx.stroke();
-                
-            // }
         }    
     }, [])
 

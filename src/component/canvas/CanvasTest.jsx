@@ -15,7 +15,7 @@ function CanvasTest(){
             element: <RandomCanvas />
         },
         "2": {
-            title: "Star Canvas",
+            title: "Crazy Circle",
             element: <StarCanvas />
         }
     }
