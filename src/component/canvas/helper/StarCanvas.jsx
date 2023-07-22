@@ -11,10 +11,10 @@ function StarCanvas(){
     
 
     useEffect(() => {
-        if(starCount > 100){
-            setStarCount(pre => 100)
+        if(starCount > 1000){
+            setStarCount(pre => 1000)
         }
-        
+
         if(canvas.current){
 
             let ctx = canvas.current.getContext('2d');
@@ -89,7 +89,7 @@ function StarCanvas(){
 
 
             for(let i=0; i<starCount; i++){
-                let radius = 10;
+                let radius = Math.random();
                 let x =  Math.random() * (canvas.current.width - radius * 2) + radius;
                 let y = Math.random() * (canvas.current.height - radius * radius) + radius;
                 let dx = Math.random() >= 0.5 ? 1 : -1;
