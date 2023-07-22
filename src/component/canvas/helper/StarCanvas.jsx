@@ -11,6 +11,10 @@ function StarCanvas(){
     
 
     useEffect(() => {
+        if(starCount > 100){
+            setStarCount(pre => 100)
+            alert("Sorry, uable to generate more than 100 circles.")
+        }
         if(canvas.current){
 
             let ctx = canvas.current.getContext('2d');
@@ -84,10 +88,10 @@ function StarCanvas(){
             let circleArray = [];
 
 
-            for(let i=0; i<1000; i++){
+            for(let i=0; i<starCount; i++){
                 let radius = 10;
-                let x =  Math.random() * (canvas.current.width - radius);
-                let y = Math.random() * (canvas.current.height - radius);
+                let x =  Math.random() * (canvas.current.width - radius * 2) + radius;
+                let y = Math.random() * (canvas.current.height - radius * radius) + radius;
                 let dx = Math.random() >= 0.5 ? 1 : -1;
                 let dy = Math.random() >= 0.5 ? 1 : -1;
                 let color =  `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
@@ -118,7 +122,7 @@ function StarCanvas(){
             animate()
             
         }    
-    }, [])
+    }, [starCount])
 
     return (
         <>
