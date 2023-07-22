@@ -129,6 +129,7 @@ function StarCanvas(){
             <input 
                placeholder="Enter number of stars" 
                type="number"
+               value={starCount}
                onChange={(e) => {
                 setStarCount(pre => {
                     if(e.target.value < 0){
