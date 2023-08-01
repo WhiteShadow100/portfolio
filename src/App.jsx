@@ -9,11 +9,15 @@ import './style/canvas.css';
 import axios from 'axios'
 
 function App() {
+
+  const [data, setData] = useState([])
   
   useEffect(() => {
     axios.get('https://whiteshadow.bsite.net/WeatherForecast')
       .then(response => {
-        console.log("Response => ", response  )
+        if(response.status == 200){
+          setData(response.data)
+        }
       })
       .catch(error => {
         console.error(error);
@@ -23,6 +27,37 @@ function App() {
   return (
     <>
       <AppRouter />
+
+      {
+        (data || []).length > 0 ? (
+          <>
+            <h1>This Whether Forecast:</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Temperature F</th>
+                  <th>Temperature C</th>
+                  <th>Summary</th>
+                </tr>
+              </thead>
+              {
+                data.map(a => (
+                  <tr>
+                    <td>{a.date}</td>
+                    <td>{a.temperatureC}</td>
+                    <td>{a.temperatureF}</td>
+                    <td>{a.summary}</td>
+                  </tr>
+                ))
+              }
+
+            </table>
+          </>
+        ) : (
+          <></>
+        )
+      }
     </>
   )
 }
