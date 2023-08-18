@@ -1,15 +1,15 @@
-function Square(ctx, size, color, x_cord, y_cord, x_velocity=0, y_velocity=0){
+function Square(size, color, x_cord, y_cord, border_color=''){
     this.size = size;
     this.color = color;
     this.x_cord = x_cord;
     this.y_cord = y_cord;
-    this.x_velocity = x_velocity;
-    this.y_velocity = y_velocity;
+    this.border_color = border_color;
 
     // draws the square on to the screen
-    this.draw = function(){
+    this.draw = function(ctx){
+        if(!ctx){ return }
         ctx.beginPath();
-        ctx.strokeStyle = this.color;
+        ctx.strokeStyle = this.border_color;
         ctx.fillStyle = this.color;
         ctx.rect(this.x_cord, this.y_cord, this.size, this.size);
         ctx.stroke();
@@ -31,20 +31,6 @@ function Square(ctx, size, color, x_cord, y_cord, x_velocity=0, y_velocity=0){
         return {x: this.x_cord, y: this.y_cord}
     }
 
-    // sets the x velocity of the squar
-    this.setXVelocity = function(x_velocity){
-        this.x_velocity = x_velocity
-    }
-
-    // sets the y velocity of the squar
-    this.setYVelocity = function(y_velocity){
-        this.y_velocity = y_velocity
-    }
-
-    // returns the velocity of the square
-    this.getVelocity = function(){
-        return {x: this.x_velocity, y: this.y_velocity}
-    }
 }
 
 export default Square;

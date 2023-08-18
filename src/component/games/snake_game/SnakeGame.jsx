@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Square from "../../../assets/canvas/shapes/Square";
+import Snake from "./Snake";
 
 function SnakeGame(){
 
@@ -20,41 +21,23 @@ function SnakeGame(){
             // ctx.canvas.width  = window.innerWidth;
             // ctx.canvas.height = window.innerHeight;
 
-            let square = new Square(ctx, 20, 'white', 10, 10)
+            let snake = new Snake( 10, 'white', 10, 10, 0.5, 0.5)
 
 
             // Key listener
             window.addEventListener("keydown", function (event) {
                 if(event.code === 'ArrowRight'){
-                    let {x, y} = square.getCord()
-                    console.log(square.x_cord)
-                    square.setXCord(x+50)
+                    snake.move_down()
                 }
-                // switch (event.key) {
-                // case "ArrowDown":
-                //     square.draw()
-                //     // console.log(square.getCord())
-                //     break;
-                // case "ArrowUp":
-                //     // square.move_down()
-                //     break;
-                // case "ArrowLeft":
-                //     // code for "left arrow" key press.
-                //     break;
-                // case "ArrowRight":
-                //     // code for "right arrow" key press.
-                //     break;
-                // default:
-                //     return; // Quit when this doesn't handle the key event.
-                // }
             
                 // Cancel the default action to avoid it being handled twice
                 event.preventDefault();
             });
 
-            
 
+            snake.increase(10)
 
+            snake.test()
             
             function animate(){
                 requestAnimationFrame(animate)
@@ -62,7 +45,7 @@ function SnakeGame(){
                 // clearing canvas
                 ctx.clearRect(0, 0, innerWidth, innerHeight)
                 
-                square.draw()
+                snake.draw(ctx)
 
                 // square.move()
             }
