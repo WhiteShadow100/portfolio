@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom'
 import AppRouter from './AppRouter'
 
 import './style/canvas.css';
+import SnakeGame from './component/games/snake_game/SnakeGame'
 
 function App() {
   
 
   return (
     <>
-      <AppRouter />
+      {/* <AppRouter /> */}
+      <SnakeGame />
     </>
   )
 }
