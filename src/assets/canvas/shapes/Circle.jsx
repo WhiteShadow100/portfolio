@@ -1,9 +1,9 @@
-function Square(size, color, x_cord, y_cord, border_color=''){
+function Circle(size, color, x_cord, y_cord, border_color=null){
     this.size = size;
     this.color = color;
     this.x_cord = x_cord;
     this.y_cord = y_cord;
-    this.border_color = border_color;
+    this.border_color = border_color || color;
 
     // draws the square on to the screen
     this.draw = function(ctx){
@@ -11,7 +11,7 @@ function Square(size, color, x_cord, y_cord, border_color=''){
         ctx.beginPath();
         ctx.strokeStyle = this.border_color;
         ctx.fillStyle = this.color;
-        ctx.rect(this.x_cord, this.y_cord, this.size, this.size);
+        ctx.arc(this.x_cord, this.y_cord, this.size, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.fill();
     }
@@ -31,18 +31,16 @@ function Square(size, color, x_cord, y_cord, border_color=''){
         return {x: this.x_cord, y: this.y_cord}
     }
 
-    // returns the distance between this object and other object
-    // if is_integer is true then converts the distance into integer
-    this.distance = function({x, y}, is_integer=false){
+    // returns the size 
+    this.getSize = function(){
+        return this.size
+    }
 
-        let distance = Math.abs(Math.sqrt(Math.pow((x - this.x_cord), 2) + Math.pow((y - this.y_cord), 2)));
-
-        if(is_integer){
-            distance = Math.floor(distance);
-        }
-        return distance;
+    // set the size
+    this.setSize = function(size){
+        this.size = size
     }
 
 }
 
-export default Square;
+export default Circle;

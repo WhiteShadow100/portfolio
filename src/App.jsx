@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       {/* <AppRouter /> */}
-      <SnakeGame />
+      <SnakeGame width={400} height={300} />
     </>
   )
 }
