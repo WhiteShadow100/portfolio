@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom'
 import AppRouter from './AppRouter'
 
 import './style/canvas.css';
+import ProductivityTimer from './component/canvas/productivity_timer/ProductivityTimer'
 
 function App() {
   
 
   return (
     <>
-      <AppRouter />
+      {/* <AppRouter /> */}
+      <ProductivityTimer />
     </>
   )
 }
