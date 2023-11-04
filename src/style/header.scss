@@ -1,5 +1,6 @@
 $header-height: 50px;
 $header-width: 100%;
+$header-border-width: 2px;
 $header-bg-color: white;
 
 $menu-item-padding: 0px 15px;
@@ -15,7 +16,7 @@ $logo-padding: 10px;
     background-color: $header-bg-color;
     height: $header-height;
     width: $header-width;
-    border-bottom: 2px solid rgb(209, 201, 201);
+    border-bottom: $header-border-width solid rgb(209, 201, 201);
     text-align: center;
     justify-items: center;
 }

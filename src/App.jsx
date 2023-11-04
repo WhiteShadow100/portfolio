@@ -12,6 +12,7 @@ import './style/header.scss'
 import './style/body.scss'
 import './style/canvas.css';
 import './style/anchor.scss';
+import './style/portfolio.scss';
 
 function App() {
   

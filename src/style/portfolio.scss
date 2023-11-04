@@ -1,0 +1,56 @@
+@import './header.scss';
+
+$format-container-width: 200px;
+$format-container-height: 100vh;
+$format-container-border-width: 2px;
+
+$option-container-width: 200px;
+$option-container-height: 100vh;
+$option-container-border-width: 2px;
+
+
+.portfolio-container {
+    display: flex;
+}
+
+.option-btn {
+    display: inline-block;
+    position: fixed;
+    top: 50px;
+    left: 0px;
+
+    height: 40px;
+    width: 40px;
+
+    border-radius: 50%;
+}
+
+.option-container {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+
+    height: $option-container-height;
+    width: $option-container-width;
+
+    border-right: $option-container-border-width solid rgb(197, 193, 193);
+}
+
+.editor-container {
+    display: flex;
+    justify-content: center;
+    margin-left: calc($option-container-width + $format-container-border-width);
+    width: calc(100% - ($format-container-width + $format-container-border-width) - ($option-container-width + $format-container-border-width));
+    height: calc(100vh - $header-height - $header-border-width);
+}
+
+.format-container{
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    
+    width: $format-container-width;
+    height: $format-container-height;
+
+    border-left: $format-container-border-width solid rgb(216, 212, 212);
+}

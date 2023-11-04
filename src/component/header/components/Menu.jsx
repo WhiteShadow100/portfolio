@@ -11,7 +11,7 @@ const Menu = ({ className='' }) => {
             link: ''
         }, {
             title: "Porfolio",
-            link: ''
+            link: '/portfolio'
         }
     ])
 
