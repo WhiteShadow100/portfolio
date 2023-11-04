@@ -1,0 +1,71 @@
+$header-height: 50px;
+$header-width: 100%;
+$header-bg-color: white;
+
+$menu-item-padding: 0px 15px;
+
+$logo-container-width: 175px;
+$logo-padding: 10px;
+
+.header-container {
+    position: sticky;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    background-color: $header-bg-color;
+    height: $header-height;
+    width: $header-width;
+    border-bottom: 2px solid rgb(209, 201, 201);
+    text-align: center;
+    justify-items: center;
+}
+
+.header-item {
+    display: inline-block;
+    height: $header-height;
+    line-height: $header-height;
+}
+
+.logo-container {
+    display: flex;
+    width: $logo-container-width;
+    overflow: hidden;
+}
+
+.logo-icon {
+    position: relative;
+    left: 5px;
+    top: -5px;
+    padding: $logo-padding 0px;
+    height: calc($header-height - ($logo-padding * 2));
+    aspect-ratio: 1 / 1;
+    display: inline-block;
+}
+
+.logo-text {
+    display: inline-block;
+    height: $header-height;
+    line-height: -50;
+}
+
+.menu-container {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    list-style: none;
+    width: calc(75% - $logo-container-width);
+    justify-content: center;
+}
+
+.menu-item {
+    display: inline-block;
+    height: calc($header-height);
+    line-height: calc($header-height);
+    padding: $menu-item-padding;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    color: cornflowerblue;
+}
+
