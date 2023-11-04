@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const Menu = ({ className='' }) => {
 
@@ -18,7 +19,7 @@ const Menu = ({ className='' }) => {
         <ul className={`${className} menu-container`}>
             {
                 menu.map(temp => (
-                    <li className='menu-item'><Link to={temp.link}>{temp.title}</Link></li>
+                    <li key={uuidv4()} className='menu-item'><Link to={temp.link}>{temp.title}</Link></li>
                 ))
             }
         </ul>

@@ -19,7 +19,9 @@ function App() {
   return (
     <>
       <Header />
-      {/* <AppRouter /> */}
+      <div className='main-body'>
+        <AppRouter />
+      </div>
       {/* <SnakeGame width={400} height={300} /> */}
     </>
   )
