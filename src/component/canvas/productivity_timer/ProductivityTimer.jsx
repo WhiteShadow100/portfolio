@@ -6,7 +6,7 @@ function ProductivityTimer(){
     const canvas = useRef();
 
     useEffect(() => {
-        if(canvas != null && canvas.current != null){
+        window.onload = function() {
             const ctx = canvas.current.getContext('2d');
             ctx.imageSmoothingEnabled = false;
 
@@ -23,8 +23,10 @@ function ProductivityTimer(){
             // var centerShift_x = ( canvas_width - img.width*ratio ) / 2;
             // var centerShift_y = ( canvas_height - img.height*ratio ) / 2;  
             
-            
-            ctx.drawImage('./tomato.png', 0,0, canvas_width, canvas_height)
+            var img = new Image();
+            img.src = 'tomato.png';
+
+            ctx.drawImage(img, 0,0, canvas_width, canvas_height)
             
             function animate(){
                 requestAnimationFrame(animate)
@@ -38,6 +40,9 @@ function ProductivityTimer(){
 
             animate();
         }
+        // if(canvas != null && canvas.current != null){
+            
+        // }
     }, [])
 
     return(
