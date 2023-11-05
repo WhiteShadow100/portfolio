@@ -8,6 +8,9 @@ $option-container-width: 200px;
 $option-container-height: 100vh;
 $option-container-border-width: 2px;
 
+$print-container-height: 842px;
+$print-container-width: 595px;
+
 
 .portfolio-container {
     display: flex;
@@ -38,10 +41,22 @@ $option-container-border-width: 2px;
 
 .editor-container {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: center;
     margin-left: calc($option-container-width + $format-container-border-width);
     width: calc(100% - ($format-container-width + $format-container-border-width) - ($option-container-width + $format-container-border-width));
-    height: calc(100vh - $header-height - $header-border-width);
+    height: fit-content;
+    padding: 20px;
+}
+
+.print-container {
+    display: flex;
+    margin: 20px;
+    padding: 20px;
+    height: $print-container-height;
+    width: $print-container-width;
+    border: 1px solid black;
+
 }
 
 .format-container{
@@ -53,4 +68,8 @@ $option-container-border-width: 2px;
     height: $format-container-height;
 
     border-left: $format-container-border-width solid rgb(216, 212, 212);
+}
+
+.input-txt {
+    outline: none;
 }
