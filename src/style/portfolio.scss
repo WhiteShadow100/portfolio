@@ -52,11 +52,10 @@ $print-container-width: 595px;
 .print-container {
     display: flex;
     margin: 20px;
-    padding: 20px;
+    // padding: 20px;
     height: $print-container-height;
     width: $print-container-width;
     border: 1px solid black;
-
 }
 
 .format-container{

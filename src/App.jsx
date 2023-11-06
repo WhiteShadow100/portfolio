@@ -16,7 +16,6 @@ import './style/portfolio.scss';
 
 function App() {
   
-
   return (
     <>
       <Header />
