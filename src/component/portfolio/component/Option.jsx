@@ -15,7 +15,7 @@ const Option = () => {
             "parentId": null,
             "typeEnum": "text",
             "label": "Text",
-            "element": ({id='', style={}, className=''}) => (<textarea id={id} type="text" style={{...style}} className={`${className} portfolio-component input-txt`} />),
+            "element": ({id='', style={}, className=''}) => (<textarea id={id} type="text" draggable={true} style={{...style}} className={`${className} portfolio-component input-txt`} />),
             "style": { resize: 'none', position: 'relative', width: '100px', maxWidth: '100%', maxHeight: '100%', boxSizing: 'border-box', zIndex: elementList.length, backgroundColor: '#ffffff', border: '1px dashed black' },
         },
         {
@@ -23,8 +23,8 @@ const Option = () => {
             "parentId": null,
             "typeEnum": "div",
             "label": "Area",
-            "element": ({children = <></>, id='', style={}, className=''}) => (<div id={id} type="text" style={{...style}} className={`${className} portfolio-component`}>{ children }</div>),
-            "style": { overflow: 'auto', width: '100px', height: '100px', maxWidth: '100%', maxHeight: '100%', boxSizing: 'border-box', border: '1px dashed black', zIndex: elementList.length, backgroundColor: '#ffffff' },
+            "element": ({children = <></>, id='', style={}, className=''}) => (<div id={id} type="text" draggable={true} style={{...style}} className={`${className} portfolio-component`} onDragStart={(e => { setSelectedElementId(e.target.id);  console.log(e.target.id); })}>{ children }</div>),
+            "style": { overflow: 'auto', position: 'absolute', width: '100px', height: '100px', maxWidth: '100%', maxHeight: '100%', boxSizing: 'border-box', border: '1px dashed black', zIndex: elementList.length, backgroundColor: '#ffffff' },
             "children": []
         }
     ]

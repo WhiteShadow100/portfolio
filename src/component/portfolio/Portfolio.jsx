@@ -8,24 +8,29 @@ const Portfolio = () => {
 
     const parentNodeId = useMemo(() => uuidv4(), []);
 
+    // referenceing the parent container
+    const ref_parentNode = useRef(null);
+
+    // holds the currently selected element
+    const [selectedElementId, setSelectedElementId] = useState(null)
+
     // contains all the element that have been added to the page | initially adding parent node
     const [elementList, setElementList] = useState([{
         "id": parentNodeId,
         "parentId": null,
         "typeEnum": "parent",
         "label": "Parent",
-        "element": ({children, id='', style={}}) => (<div id={`${id} portfolio-print`} style={{...style}} className='print-container'>{ children }</div>),
+        "element": ({children, id='', style={}}) => (<div ref={ref_parentNode} id={`${id} portfolio-print`} style={{...style, position: 'relative'}} className='print-container' onDragOver={(e) => { e.preventDefault() }}>{ children }</div>),
         "style": { zIndex: 0 },
     }])
 
-    // holds the currently selected element
-    const [selectedElementId, setSelectedElementId] = useState(null)
+    // holds mosue offset
+    const [mouseOffset, setMouseOffset] = useState({x: 0, y: 0})
 
-
-
+    
     // handled mouse click event
-    function handleClick(element){        
-
+    function handleClick(element){   
+        
         if(element.target.id == null || element.target.id == ''){ return }
 
         let elementIds = (''+element.target.id).split(' ')
@@ -34,6 +39,16 @@ const Portfolio = () => {
         if(elementIds.length <= 0){ return }
 
         let elementId = elementIds[0]
+
+        console.log("This is elemet offset x => ", element.offsetX, "This is eleemnt offset y => ", element.offsetY) 
+
+        // setting the mouse offset in selected element
+        setMouseOffset(pre => (
+            {
+                x: element.offsetX,
+                y: element.offsetY
+            }
+        ))
 
         setSelectedElementId(elementId)
     }    
@@ -64,9 +79,38 @@ const Portfolio = () => {
         return returnValue
     }
 
+    // handles drag event
+    function handleDrag(event){
+        console.log("This is from drag event => ", event)
+        setSelectedElementId(event?.target?.id)
+    }
+
+    function handleDrop(e){
+
+        // trying to get mouse offset
+        console.log("This is drop event => ", e)
+        console.log("This is client x => ", e.clientX, "This is client y => ", e.clientY) 
+        console.log("This is offset x => ", e.offsetX, "This is offset y => ", e.offsetY) 
+        console.log("This is new x => ", (e.clientX - e.offsetX), "This is new y => ", (e.clientY - e.offsetY)) 
+        console.log("This is mouse offset", mouseOffset.x, "This is mouse offset y => ", mouseOffset.y) 
+
+        setElementList(pre => {
+            let temp = [...pre]
+
+            let tempIndex= temp.findIndex(a => a.id == selectedElementId)
+            
+            if(tempIndex == -1){ return temp }
+
+            temp[tempIndex].style["top"] = (e.offsetY) + 'px'
+            temp[tempIndex].style["left"] = (e.offsetX) + 'px'
+
+            return temp
+        })
+    }
 
 
-    // adding on click listener
+
+    // adding on click listener | on document
     useEffect(() => {
         document.addEventListener('click', handleClick)
 
@@ -74,6 +118,37 @@ const Portfolio = () => {
             document.removeEventListener('click', handleClick)
         }
     }, [])
+
+
+    // adding drop event handler to parent node
+    useEffect(() => {
+
+        if(selectedElementId == null || selectedElementId == ''){ return }
+
+        if(ref_parentNode == null && ref_parentNode.current == null){ return }
+
+        ref_parentNode.current.addEventListener('drop', handleDrop)
+
+        return (() => {
+            ref_parentNode.current.removeEventListener('drop', handleDrop)
+        })
+
+    }, [selectedElementId])
+
+    // adding on drag and on drop listener
+    useEffect(() => {
+        let elements = document.getElementsByClassName('portfolio-component')
+
+        for(let element of elements){
+            element.addEventListener('dragstart', handleDrag)
+        }        
+
+        return () => {
+            for(let element of elements){
+                element.removeEventListener('dragstart', handleDrag)
+            }
+        }
+    }, [elementList])
 
     // changes the border style of selected item
     useEffect(() => {
@@ -101,6 +176,11 @@ const Portfolio = () => {
 
     }, [selectedElementId])
 
+
+    // test
+    useEffect(() => {
+        console.log("This is mnouse offset etst => ", mouseOffset)
+    }, [mouseOffset])
 
 
     return (

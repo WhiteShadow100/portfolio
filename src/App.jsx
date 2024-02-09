@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Link } from 'react-router-dom'
@@ -15,7 +15,7 @@ import './style/anchor.scss';
 import './style/portfolio.scss';
 
 function App() {
-  
+
   return (
     <>
       <Header />
